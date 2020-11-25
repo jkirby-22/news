@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for k in key_terms %}
+  <div class="card centre news_card" style="width: 60%;">
+    <div class="card-body">
+      <h4 class="card-title"> {{ k.{{ loop.index0 }} }}</h4>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
