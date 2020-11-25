@@ -17,14 +17,44 @@ $(document).ready(function() {
     //console.log("here");
     $(this).toggleClass("btn-outline-success");
     $(this).toggleClass("btn-success");
+
+    var id_hash = '#' + $(this).attr('id');
+    var new_term_selector = id_hash + '.new_term';
+    var button_selector = id_hash + '.token_button';
+
+    if (Number($(this).attr("order")) == '-1') {
+      var order = Number($(new_term_selector).attr("current_order"));
+      $(this).attr("order", order);
+      $(new_term_selector).attr("current_order", order + 1);
+    }
+
+    else {
+      $(this).attr("order", '-1');
+    }
+
+    $(new_term_selector)[0].innerText= ' ';
+
+    var new_text = ''
+    var current_order = Number($(new_term_selector).attr("current_order"))
+    for (let i = 0; i < current_order; i++ ) {
+      $(button_selector).each(function( index ) {
+        console.log( i + ":" + $(this).attr("order"));
+        if (Number($(this).attr("order")) == i) {
+          new_text = new_text + " " + $(this).text();
+        }
+      });
+    }
+    $(new_term_selector)[0].innerText = new_text;
   });
 
   $(".tokenise").on("click", function() {
 
 	  var clicked_obj = $(this);
-		var id = '#' + $(this).attr('id');
-		var title_selector = id + '.title';
-		var description_selector = id + '.description';
+    var id = $(this).attr('id');
+		var id_hash = '#' + $(this).attr('id');
+		var title_selector = id_hash + '.title';
+		var description_selector = id_hash + '.description';
+    var term_box_selector = id_hash + '.display';
 
 		var title = $(title_selector).text(); //set to a variable
 		var description = $(description_selector).text();
@@ -40,10 +70,10 @@ $(document).ready(function() {
       success: function(response) {
 
         $(description_selector)[0].innerHTML = " ";
-
+        $(term_box_selector).removeClass("display");
         for (let i = 0; i < response["size"]; i++ ) {
           //console.log(response[i.toString()]);response[i.toString()]
-          $(description_selector)[0].innerHTML += '<button type="button" class="btn btn-outline-success token_button">' + response[i.toString()] + '</button>';
+          $(description_selector)[0].innerHTML += '<button id="' + id + '" type="button" order="-1" class="btn btn-outline-success token_button">' + response[i.toString()] + '</button>';
         }
 
 		  },

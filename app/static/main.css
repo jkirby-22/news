@@ -5,3 +5,18 @@
 .news_card {
   margin-top: 2em;
 }
+
+.display {
+  display: none;
+}
+
+.term_area
+{
+    background: #eee;
+    border: 1px solid #bbb;
+    font-family: monospace;
+    height: 150px;
+    line-height: 20px;
+    overflow: auto;
+    width: 100%;
+}

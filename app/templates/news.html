@@ -10,6 +10,11 @@
       <p id="{{ loop.index0 }}" class="card-text description">{{ a.description }}</p>
       <h6 class="card-subtitle d-inline mb-2 text-muted">by {{ a.author }}</h6>
       <button id="{{ loop.index0 }}" type="button" class="btn btn-secondary float-right tokenise">Select Key Terms</button>
+      <div class="form-group display" id="{{ loop.index0 }}" style="margin-top: 1em;">
+        <label for="exampleFormControlTextarea1 card-text">New Key Term </label>
+        <textarea readonly current_order="0" class="form-control new_term" id="{{ loop.index0 }}" rows="3"></textarea>
+        <button id="{{ loop.index0 }}" type="button" class="btn btn-primary confirm" style="margin-top: 1em;">Confirm</button>
+      </div>
     </div>
   </div>
 
