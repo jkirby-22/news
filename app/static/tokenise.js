@@ -12,6 +12,12 @@ $(document).ready(function() {
 	    }
 	});
 
+  $('body').on('click', '.token_button', function () {
+    //console.log($(this));
+    //console.log("here");
+    $(this).toggleClass("btn-outline-success");
+    $(this).toggleClass("btn-success");
+  });
 
   $(".tokenise").on("click", function() {
 
@@ -20,24 +26,29 @@ $(document).ready(function() {
 		var title_selector = id + '.title';
 		var description_selector = id + '.description';
 
-		var title = $(title_selector).text();
+		var title = $(title_selector).text(); //set to a variable
 		var description = $(description_selector).text();
 
 
     var title_url = encodeURI("http://127.0.0.1:3000/tokeniser?input=" + title + "&seperator= ")
     var description_url = encodeURI("http://127.0.0.1:3000/tokeniser?input=" + description + "&seperator= ")
 
-
 		$.ajax({
 			url: description_url,
       type: 'GET',
       dataType: 'json',
-      success: function(response)
-				{
-              console.log(response)
+      success: function(response) {
 
-		    },
-			error: function(error){
+        $(description_selector)[0].innerHTML = " ";
+
+        for (let i = 0; i < response["size"]; i++ ) {
+          //console.log(response[i.toString()]);response[i.toString()]
+          $(description_selector)[0].innerHTML += '<button type="button" class="btn btn-outline-success token_button">' + response[i.toString()] + '</button>';
+        }
+
+		  },
+
+			error: function(error) {
 				console.log(error);
 			}
 		});
