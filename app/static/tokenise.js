@@ -38,7 +38,6 @@ $(document).ready(function() {
     var current_order = Number($(new_term_selector).attr("current_order"))
     for (let i = 0; i < current_order; i++ ) {
       $(button_selector).each(function( index ) {
-        console.log( i + ":" + $(this).attr("order"));
         if (Number($(this).attr("order")) == i) {
           new_text = new_text + " " + $(this).text();
         }
@@ -49,7 +48,9 @@ $(document).ready(function() {
 
   $(".tokenise").on("click", function() {
 
-	  var clicked_obj = $(this);
+		$(this).hide();
+
+		console.log($(this));
     var id = $(this).attr('id');
 		var id_hash = '#' + $(this).attr('id');
 		var title_selector = id_hash + '.title';
@@ -60,8 +61,8 @@ $(document).ready(function() {
 		var description = $(description_selector).text();
 
 
-    var title_url = encodeURI("http://127.0.0.1:3000/tokeniser?input=" + title + "&seperator= ")
-    var description_url = encodeURI("http://127.0.0.1:3000/tokeniser?input=" + description + "&seperator= ")
+    var title_url = encodeURI("http://127.0.0.1:3000/tokeniser?input=" + title + "&seperator= ");
+    var description_url = encodeURI("http://127.0.0.1:3000/tokeniser?input=" + description + "&seperator= ");
 
 		$.ajax({
 			url: description_url,
@@ -82,6 +83,28 @@ $(document).ready(function() {
 				console.log(error);
 			}
 		});
+
+		$.ajax({
+			url: title_url,
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+        $(title_selector)[0].innerHTML = " ";
+        $(term_box_selector).removeClass("display");
+        for (let i = 0; i < response["size"]; i++ ) {
+          //console.log(response[i.toString()]);response[i.toString()]
+          $(title_selector)[0].innerHTML += '<button id="' + id + '" type="button" order="-1" class="btn btn-outline-success token_button">' + response[i.toString()] + '</button>';
+					$("a").removeAttr('href');
+        }
+
+		  },
+
+			error: function(error) {
+				console.log(error);
+			}
+		});
+
+		console.log($(this));
 
 	});
 });
