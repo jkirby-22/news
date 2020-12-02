@@ -2,11 +2,11 @@
 {% block content %}
 
 {% for a in articles %}
-  <div class="card centre news_card" style="width: 60%;">
+  <div class="card centre news_card" style="width: 60%; margin-top: 5em;">
     <img class="card-img-top" src="{{ a.urlToImage }}">
     <div class="card-body">
       <h4 class="card-title"> {{ a.source.name }}</h4>
-      <a href="{{ a.url }}"><h5 id="{{ loop.index0 }}"  href="{{ a.url }}" class="card-title title">{{ a.title }}</h5></a>
+      <a class="news_link" id="{{ loop.index0 }}" href="{{ a.url }}"><h5 id="{{ loop.index0 }}"  href="{{ a.url }}" class="card-title title">{{ a.title }}</h5></a>
       <p id="{{ loop.index0 }}" class="card-text description">{{ a.description }}</p>
       <h6 class="card-subtitle d-inline mb-2 text-muted">by {{ a.author }}</h6>
       <button id="{{ loop.index0 }}" type="button" class="btn btn-secondary float-right tokenise">Select Key Terms</button>

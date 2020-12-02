@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+    <!-- Default form login -->
+          <div class="card centre" style="width: 50%; margin-top:5em;">
+            <div class="card-body">
+              <h5 class="card-title">Topic</p>
+              <div class="input-group">
+               <select class="form-control" id="topic">
+                 <option disabled selected value>-- Select --</span>
+                 {% for topic in allTopics %}
+                 <option value={{topic.id}}>{{topic.name}}</option>
+                 {% endfor %}
+                 <p>
+               </select>
+
+               <div class="input-group-append">
+                  <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#topicModal">
+                     +
+                  </button>
+               </div>
+            </div>
+
+            <h5 class="card-title">Key Term</p>
+            <div class="input-group">
+             <select class="form-control" id="key_terms">
+             </select>
+
+             <div class="input-group-append">
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#keytermModal">
+                   +
+                </button>
+             </div>
+            </div>
+            <button disabled id="getNews" class="btn btn-secondary" type="submit" style="margin-top:1em;">Get News</button>
+          </div>
+        </div>
+
+
+          <div class="modal fade" id="topicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Topic</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Topic Name</label>
+                  <input class="form-control" id="new_topic_name">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="addTopic">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="keytermModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Keyterm</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+              <label for="exampleFormControlInput1">Topic</label>
+              <select class="form-control" id="select_term_topic">
+                {% for topic in allTopics %}
+                <option value={{topic.id}}>{{topic.name}}</option>
+                {% endfor %}
+                <p>
+              </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Keyterm</label>
+                <input class="form-control" id="new_keyterm_name">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="addKeyterm">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+            <!-- Default form login -->
+{% endblock %}

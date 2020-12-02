@@ -64,14 +64,15 @@ $(document).ready(function() {
 		var title_selector = id_hash + '.title';
 		var description_selector = id_hash + '.description';
     var term_box_selector = id_hash + '.display';
+		var link_selector = id_hash + '.news_link';
 
 		//get words to be tokenised
 		var title = $(title_selector).text();
 		var description = $(description_selector).text();
 
 		//generate URI to send tokenise request to
-    var title_url = encodeURI("http://127.0.0.1:3000/tokeniser?input=" + title + "&seperator= ");
-    var description_url = encodeURI("http://127.0.0.1:3000/tokeniser?input=" + description + "&seperator= ");
+    var title_url = encodeURI("https://tokenise.herokuapp.com/tokeniser?input=" + title + "&seperator= ");
+    var description_url = encodeURI("https://tokenise.herokuapp.com/tokeniser?input=" + description + "&seperator= ");
 
 		//replaces all description words with buttons
 		$.ajax({
@@ -103,7 +104,7 @@ $(document).ready(function() {
         $(term_box_selector).removeClass("display");
         for (let i = 0; i < response["size"]; i++ ) {
           $(title_selector)[0].innerHTML += '<button id="' + id + '" type="button" order="-1" class="btn btn-outline-success token_button">' + response[i.toString()] + '</button>';
-					$("a").removeAttr('href'); //remove link to news article from buttons
+					$(link_selector).removeAttr('href'); //remove link to news article from buttons
         }
 
 		  },
